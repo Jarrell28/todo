@@ -28,9 +28,6 @@ Run ``` npm i ``` to install the following dependencies:
  **Initialize Application**
 
 ``` npm start ```
-
-
-### How To Use
  
 
 #### UML / Application Wiring Diagram
