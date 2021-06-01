@@ -9,6 +9,7 @@ A Web Application for securely managing a To Do List
 ### Links and Resources
 
 - [Pull Request](https://github.com/Jarrell28/todo/pull/1)
+- [Deployed Link](https://sleepy-benz-76cc26.netlify.app/)
 
 ### Setup
 
