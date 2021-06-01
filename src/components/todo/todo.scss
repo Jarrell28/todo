@@ -44,8 +44,9 @@ body, html {
 
     ul {
         list-style-type:none;
-        margin:0;
+        margin:0 0 0 20px;
         padding:0;
+        flex: 1;
 
         li {
 
@@ -53,7 +54,9 @@ body, html {
             display:flex;
             flex-direction:row;
             font-size: .75em;
-            margin: .75em .5em;
+            // margin: .75em .5em;
+            cursor: pointer;
+
 
             &.complete-true {
               span {
