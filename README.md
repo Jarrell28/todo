@@ -8,8 +8,8 @@ A Web Application for securely managing a To Do List
 
 ### Links and Resources
 
-- [Pull Request]()
-- [Deployed Link]()
+- [Pull Request]
+- [Deployed Link]
 
 ### Setup
 
