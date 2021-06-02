@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
+import useAjax from '../../hooks/ajax';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -9,11 +10,11 @@ import './todo.scss';
 
 function ToDo() {
   const [list, setList] = useState([]);
+  const [getResults, postResult, updateResult, deleteResult] = useAjax();
 
   const addItem = (item) => {
-    item._id = Math.random();
     item.complete = false;
-    setList([...list, item]);
+    postResult(item, newItem => setList([...list, newItem]));
   };
 
   const toggleComplete = id => {
@@ -22,26 +23,29 @@ function ToDo() {
 
     if (item._id) {
       item.complete = !item.complete;
-      let newList = list.map(listItem => listItem._id === item._id ? item : listItem);
-      setList(newList);
+
+      updateResult(id, item, (updatedItem) => setList(list.map(listItem => listItem._id === item._id ? updatedItem : listItem)));
     }
 
   };
 
-  useEffect(() => {
-    let list = [
-      { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A' },
-      { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A' },
-      { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B' },
-      { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C' },
-      { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B' },
-    ];
+  const deleteItem = id => {
+    let item = list.filter(i => i._id === id)[0] || {};
 
-    setList(list);
+    if (item._id) {
+      deleteResult(id, () => setList(list.filter(listItem => {
+        console.log(typeof listItem._id, typeof id)
+        return listItem._id !== id
+      })));
+    }
+  }
+
+  useEffect(() => {
+    getResults((dataArray) => setList(dataArray));
   }, [])
 
   useEffect(() => {
-    let count = list.filter(item => !item.complete).length;
+    let count = list.filter(item => !item?.complete).length;
     document.title = `Todo App-${count} item(s) to complete`
   }, [list])
 
@@ -66,6 +70,7 @@ function ToDo() {
           <TodoList
             list={list}
             handleComplete={toggleComplete}
+            handleDelete={deleteItem}
           />
         </section>
       </Container>

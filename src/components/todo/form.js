@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useForm from '../../hooks/form.js';
 
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
@@ -6,14 +7,9 @@ import Button from 'react-bootstrap/Button';
 
 function TodoForm(props) {
   const [item, setItem] = useState({});
+  const [handleSubmit, handleChange, values] = useForm(formSubmit);
 
-  const handleInputChange = e => {
-    setItem({ ...item, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    e.target.reset();
+  function formSubmit(item) {
     props.handleSubmit(item);
     const newItem = {};
     setItem(newItem);
@@ -22,24 +18,24 @@ function TodoForm(props) {
   return (
     <>
 
-      <Card style={{ width: '18rem' }}>
+      <Card style={{ width: '18rem' }} className="mr-5">
         <Card.Body>
           <Card.Title>Add Item</Card.Title>
 
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>To Do Item</Form.Label>
-              <Form.Control type="text" placeholder="Add To Do List Item" onChange={handleInputChange} name="text" />
+              <Form.Control type="text" placeholder="Add To Do List Item" onChange={handleChange} name="text" />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Assigned To</Form.Label>
-              <Form.Control type="text" placeholder="Assigned To" onChange={handleInputChange} name="assignee" />
+              <Form.Control type="text" placeholder="Assigned To" onChange={handleChange} name="assignee" />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Difficulty Rating</Form.Label>
-              <Form.Control defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange} />
+              <Form.Control defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleChange} />
             </Form.Group>
 
             <Button variant="info" type="submit">Add Item</Button>
