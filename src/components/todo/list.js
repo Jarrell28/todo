@@ -14,7 +14,7 @@ function TodoList(props) {
           <Modal.Dialog key={item._id} className="m-2 shadow p-0 bg-body rounded">
             <Modal.Header className="align-items-center">
               <div>
-                <Badge pill variant={item.complete ? "success" : "danger"} className="mr-3" onClick={() => props.handleComplete(item._id)}>{item.complete ? "pending" : "completed"}</Badge> <span>{item.assignee}</span>
+                <Badge pill variant={item.complete ? "danger" : "success"} className="mr-3" onClick={() => props.handleComplete(item._id)}>{item.complete ? "completed" : "pending"}</Badge> <span>{item.assignee}</span>
               </div>
               <button type="button" className="close" onClick={() => props.handleDelete(item._id)}><span aria-hidden="true">×</span><span className="sr-only">Close</span></button>
             </Modal.Header>
