@@ -35,6 +35,6 @@ Run ``` npm i ``` to install the following dependencies:
 ![image](https://user-images.githubusercontent.com/33704616/120566166-4bf89f00-c3d4-11eb-88db-c3bec23b5d96.png)
 
 
-![image](https://user-images.githubusercontent.com/33704616/120399037-e2f42700-c300-11eb-81dc-d0ab0868dc8d.png)
+![image](https://user-images.githubusercontent.com/33704616/120566516-0688a180-c3d5-11eb-9995-ef88501283ea.png)
 
 
