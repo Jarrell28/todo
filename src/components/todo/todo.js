@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 import useAjax from '../../hooks/ajax';
+import { SettingsContext } from '../../context/settings';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -10,7 +11,9 @@ import './todo.scss';
 
 function ToDo() {
   const [list, setList] = useState([]);
+  const [filteredList, setFilteredList] = useState([])
   const [getResults, postResult, updateResult, deleteResult] = useAjax();
+  const settings = useContext(SettingsContext);
 
   const addItem = (item) => {
     item.complete = false;
@@ -42,11 +45,16 @@ function ToDo() {
 
   useEffect(() => {
     getResults((dataArray) => setList(dataArray));
+    console.log(settings);
   }, [])
 
   useEffect(() => {
     let count = list.filter(item => !item?.complete).length;
-    document.title = `Todo App-${count} item(s) to complete`
+    document.title = `Todo App-${count} item(s) to complete`;
+
+    setFilteredList(list.filter((item) => settings.hideCompleted ? !item.complete : item).filter((item, i) => i < settings.itemsPerPage).sort((a, b) => {
+      return a[settings.sortBy] > b[settings.sortBy] ? 1 : -1;
+    }));
   }, [list])
 
   return (
@@ -68,7 +76,7 @@ function ToDo() {
           </div>
 
           <TodoList
-            list={list}
+            list={filteredList}
             handleComplete={toggleComplete}
             handleDelete={deleteItem}
           />
