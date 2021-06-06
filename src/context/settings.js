@@ -7,10 +7,20 @@ function SettingsProvider(props) {
     const [hideCompleted, setHideCompleted] = useState(false);
     const [sortBy, setSortBy] = useState('difficulty');
 
+    const toggleCompleted = () => {
+        setHideCompleted(!hideCompleted);
+    }
+
+    const handleItemsPerPage = (e) => {
+        setItemsPerPage(parseInt(e.target.value));
+    }
+
     const state = {
         itemsPerPage,
         hideCompleted,
-        sortBy
+        sortBy,
+        toggleCompleted,
+        handleItemsPerPage
     }
 
     return (
