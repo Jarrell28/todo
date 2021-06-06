@@ -55,7 +55,13 @@ function ToDo() {
     setFilteredList(list.filter((item) => settings.hideCompleted ? !item.complete : item).filter((item, i) => i < settings.itemsPerPage).sort((a, b) => {
       return a[settings.sortBy] > b[settings.sortBy] ? 1 : -1;
     }));
-  }, [list])
+  }, [list]);
+
+  useEffect(() => {
+    setFilteredList(list.filter((item) => settings.hideCompleted ? !item.complete : item).filter((item, i) => i < settings.itemsPerPage).sort((a, b) => {
+      return a[settings.sortBy] > b[settings.sortBy] ? 1 : -1;
+    }));
+  }, [settings.hideCompleted, settings.itemsPerPage])
 
   return (
     <>

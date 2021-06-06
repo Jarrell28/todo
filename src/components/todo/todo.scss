@@ -94,4 +94,20 @@ body, html {
         }
     }
 
+    .todos {
+        flex: 1;
+
+        .list-settings {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 500px;
+
+            input {
+                width: 45px;
+                margin-left: 10px;
+            }
+        }
+    }
+
 }
